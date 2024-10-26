@@ -20,19 +20,17 @@ import internal.tg_bot.report
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from internal.tg_bot.init import dp
 
-START = """здраствуйте\n \n бота создала команда MISIS GogoRiki"""
+START = """Здравствуйте!\n \nБота создала команда MISIS GogoRiki"""
 
 @dp.message_handler(commands=['start'])
 async def command_start(message: types.Message):
+    """
+    Стартовое сообщение
+    Запрос входных данных
+    :param message: сообщение, на которое происходит ответ
+    :return: ничего, но сообщение имеет несколько кнопок, которые введут на другие функции
+    """
     await message.reply(text=START)
-    await message.answer(text="для работы необходимо авторизироваться", reply_markup=kb.start())
+    await message.answer(text="Для работы необходимо авторизироваться", reply_markup=kb.start())
     await message.delete()
-
-
-#
-# @dp.message_handler(commands=['help'])
-# async def command_help(message: types.Message):
-#     await message.answer(HELP, parse_mode='HTML')
-#     await message.delete()
-
 

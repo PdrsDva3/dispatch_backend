@@ -2,6 +2,10 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 def get_month():
+    """
+    дополнительная функция необходимая для
+    :return:
+    """
     import datetime
     import calendar
     now = datetime.datetime.now()
@@ -15,54 +19,55 @@ def get_month():
 
 def start() -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardMarkup(resize_keyboard=True, row_width=2)
-    button = InlineKeyboardButton("авторизоваться", callback_data="start")
+    button = InlineKeyboardButton("Авторизация", callback_data="start")
     keyboard.add(button)
     return keyboard
 
 
 def login_kb() -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(resize_keyboard=True, row_width=2)
-    button = InlineKeyboardButton("Login", callback_data="login")
-    button1 = InlineKeyboardButton("password", callback_data="pwd")
+    button = InlineKeyboardButton("Ваш login", callback_data="login")
+    button1 = InlineKeyboardButton("Ваш password", callback_data="pwd")
     kb.add(button).add(button1)
     return kb
 
 
 def main_kb() -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(resize_keyboard=True, row_width=2)
-    button = InlineKeyboardButton("сегодня", callback_data="report")
-    button1 = InlineKeyboardButton("календарь", callback_data="calendar")
+    button = InlineKeyboardButton("Сегодня", callback_data="report")
+    button1 = InlineKeyboardButton("Календарь", callback_data="calendar")
     kb.add(button).add(button1)
     return kb
 
 
 def today_kb() -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(resize_keyboard=True, row_width=2)
-    b1 = InlineKeyboardButton("отчет", callback_data="download")
-    b2 = InlineKeyboardButton("анализ", callback_data="analiz")
-    b3 = InlineKeyboardButton("риски", callback_data="risk")
-    button = InlineKeyboardButton("вернуться", callback_data="cr_pr_ok")
+    b1 = InlineKeyboardButton("Отчет", callback_data="download")
+    b2 = InlineKeyboardButton("Анализ", callback_data="analiz")
+    b3 = InlineKeyboardButton("Риски", callback_data="risk")
+    button = InlineKeyboardButton("Вернуться", callback_data="cr_pr_ok")
     kb.add(b1).add(b2).add(b3).add(button)
     return kb
 
 
 def return_today_kb() -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(resize_keyboard=True, row_width=2)
-    b1 = InlineKeyboardButton("вернуться", callback_data="report")
+    b1 = InlineKeyboardButton("Вернуться", callback_data="report")
     kb.add(b1)
     return kb
 
+
 def return_kb() -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(resize_keyboard=True, row_width=2)
-    button = InlineKeyboardButton("вернуться", callback_data="cr_pr_ok")
+    button = InlineKeyboardButton("Вернуться", callback_data="cr_pr_ok")
     kb.add(button)
     return kb
 
 
 def return_calendar_kb() -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(resize_keyboard=True, row_width=2)
-    button = InlineKeyboardButton("вернуться", callback_data="cr_pr_ok")
-    button1 = InlineKeyboardButton("выбрать другой день", callback_data="calendar")
+    button = InlineKeyboardButton("Вернуться", callback_data="cr_pr_ok")
+    button1 = InlineKeyboardButton("Выбрать другой день", callback_data="calendar")
     kb.add(button1).add(button)
     return kb
 
@@ -71,7 +76,7 @@ def calendar_kb() -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(row_width=7)
     ll = list()
     st, cnt = get_month()
-    week = ["Mon", "Tue","Wed", "Thu", "Fri", "Sat", "Sun"]
+    week = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
     for day in week:
         button = InlineKeyboardButton(day, callback_data="calendar")
         ll.append(button)
@@ -85,6 +90,6 @@ def calendar_kb() -> InlineKeyboardMarkup:
         button = InlineKeyboardButton(" ", callback_data="calendar")
         ll.append(button)
     kb.add(*ll)
-    button = InlineKeyboardButton("вернуться", callback_data="cr_pr_ok")
+    button = InlineKeyboardButton("Вернуться", callback_data="cr_pr_ok")
     kb.add(button)
     return kb

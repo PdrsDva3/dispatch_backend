@@ -11,8 +11,8 @@ from internal.tg_bot.init import dp
 
 DATA = """
 ВВЕДИТЕ Ваш логин и пароль
-Логин      {}
-Пароль       {}
+Логин        {}
+Пароль      {}
 """
 PWD = "********"
 
@@ -30,8 +30,8 @@ async def update_keyboard(state: FSMContext):
         call = data['callback']
         if (p != "None" and l != "None"):
             tt = kb.login_kb()
-            tt.add(InlineKeyboardButton(text='все верно', callback_data="cr_pr_ok"))
-            await call.message.edit_text(text="проверьте введенные данные и если все "
+            tt.add(InlineKeyboardButton(text='Все верно', callback_data="cr_pr_ok"))
+            await call.message.edit_text(text="Проверьте введенные данные и если все "
                                               "верно нажмите на соответсвующую кнопку \n\n" +
                                               DATA.format(l, PWD),
                                          reply_markup=tt)
@@ -41,7 +41,7 @@ async def update_keyboard(state: FSMContext):
 
 
 @dp.callback_query_handler(text='start', state="*")
-async def new_fr(call: types.CallbackQuery, state: FSMContext):
+async def start(call: types.CallbackQuery, state: FSMContext):
     await state.update_data(login="None")
     await state.update_data(pwd="None")
     await state.update_data(callback=call)
@@ -49,26 +49,26 @@ async def new_fr(call: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text='login', state="*")
-async def inl_new_fr_name(call: types.CallbackQuery, state: FSMContext):
-    await call.message.edit_text("введите ваш login")
+async def login(call: types.CallbackQuery, state: FSMContext):
+    await call.message.edit_text("Введите ваш login")
     await LoginState.login.set()
 
 
 @dp.callback_query_handler(text='pwd', state="*")
-async def inl_new_fr_name(call: types.CallbackQuery, state: FSMContext):
-    await call.message.edit_text("введите ваш пароль")
+async def pwd(call: types.CallbackQuery, state: FSMContext):
+    await call.message.edit_text("Введите ваш пароль")
     await LoginState.pwd.set()
 
 
 @dp.callback_query_handler(text='cr_pr_ok', state="*")
-async def inl_new_fr_name(call: types.CallbackQuery, state: FSMContext):
+async def all_ok(call: types.CallbackQuery, state: FSMContext):
     await state.finish()
     await call.message.edit_text("Посмотреть данные", reply_markup=kb.main_kb())
 
 
 
 @dp.message_handler(state=LoginState.login)
-async def price_state(message: types.Message, state: FSMContext):
+async def login_state(message: types.Message, state: FSMContext):
     ll = message.text.lower()
     await state.update_data(login=ll)
     await update_keyboard(state)
@@ -77,7 +77,7 @@ async def price_state(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=LoginState.pwd)
-async def price_state(message: types.Message, state: FSMContext):
+async def pwd_state(message: types.Message, state: FSMContext):
     pwd = message.text.lower()
     await state.update_data(pwd=pwd)
     await update_keyboard(state)

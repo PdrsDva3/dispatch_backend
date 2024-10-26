@@ -21,8 +21,16 @@ bot = Bot(TOKEN_API)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 async def on_startup(_):
+    """
+    Сообщение о запуске работы чат-бота
+    :return: -
+    """
     print("HI, i work")
 
 
 def start_tg():
+    """
+    Запуск работы чат-бота
+    :return: -
+    """
     executor.start_polling(dp, on_startup=on_startup, skip_updates=True)

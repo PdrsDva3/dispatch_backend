@@ -10,6 +10,8 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from deploy import config
+
+from fastapi.responses import HTMLResponse
 # import dotenv
 
 app = FastAPI()
@@ -42,6 +44,65 @@ async def get_employee_h(employee_id: int):
     if not employee:
         raise HTTPException(status_code=404, detail="User not found")
     return employee
+
+html = """
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat</title>
+    </head>
+    <body>
+        <h1>WebSocket Chat</h1>
+        <form action="" onsubmit="sendMessage(event)">
+            <input type="text" id="messageText" autocomplete="off"/>
+            <button>Send</button>
+        </form>
+        <ul id='messages'>
+        </ul>
+        <script>
+            var ws = new WebSocket("ws://localhost:8000/ws");
+            ws.onmessage = function(event) {
+                var messages = document.getElementById('messages')
+                var message = document.createElement('li')
+                var content = document.createTextNode(event.data)
+                message.appendChild(content)
+                messages.appendChild(message)
+            };
+            function sendMessage(event) {
+                var input = document.getElementById("messageText")
+                ws.send(input.value)
+                input.value = ''
+                event.preventDefault()
+            }
+        </script>
+    </body>
+</html>
+"""
+
+
+@app.get("/")
+async def get():
+    return HTMLResponse(html)
+
+
+from fastapi import WebSocket
+import asyncio
+
+async def generate_byte_stream():
+    """Генерация потока байт в реальном времени."""
+    while True:
+        # Генерация случайных байт (например, 10 байт)
+        byte_data = b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09'
+        yield byte_data
+        await asyncio.sleep(1)  # Задержка для имитации реального времени
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        data = generate_byte_stream()
+        await websocket.send_text(f"Message text was: {data}")
+
 
 
 @app.post("/create_employee")

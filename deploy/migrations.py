@@ -1,10 +1,10 @@
 import hashlib
 
 import psycopg2
-from dotenv import DotEnv
+# from dotenv import DotEnv
 from psycopg2 import sql
 import os
-import dotenv
+# import dotenv
 import logging
 from deploy import config
 

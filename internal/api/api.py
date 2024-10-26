@@ -1,68 +1,46 @@
-import os
-from dotenv import load_dotenv
-
-import json
+from deploy import config
 import requests
+import json
 from pprint import pprint
-import time
 
-load_dotenv("/home/setqbyte/PycharmProjects/dispatch_backend/deploy/.env")
-api_key = os.getenv('YAN_API_KEY')
-yan_url = os.getenv('YAN_URL')
+api_key = config.YAN_API_KEY
+yan_url = config.YAN_URL
 
-headers = {
-    'Authorization': f'Bearer {api_key}',
-    'x-folder-id': f'{yan_url}'
-}
 
-with open('dialogue.json', 'r', encoding='utf-8') as f:
+with open('body.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
-f.close()
-data['modelUri'] = "gpt://" + yan_url + "/yandexgpt"
 
-with open('dialogue.json', 'w', encoding='utf-8') as f:
+data['modelUri'] = "gpt://" + yan_url + "/yandexgpt-lite"
+
+with open('body.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
-f.close()
 
-
-def yangpt(prompt: str):
+def gpt(data):
     url = 'https://llm.api.cloud.yandex.net/foundationModels/v1/completion'
-    with open('dialogue.json', 'r', encoding='utf-8') as f:
-        dialogue = json.load(f)
-    f.close()
 
-    dialogue['messages'] +=[{
-        "role": "user",
-        "text": prompt
-    }]
+    auth_headers = {
+        'Authorization': 'Api-Key AQVN0YxuUPrTFVCSYCYTJaRjmu8QM42ZV1CTls4s'
+    }
 
-    with open('dialogue.json', 'w', encoding='utf-8') as f:
-        json.dump(dialogue, f, ensure_ascii=False, indent=4)
-    f.close()
+    with open('body.json', 'r', encoding='utf-8') as f:
+        jj = json.load(f)
 
-    resp = requests.post(url, headers=headers, data=dialogue)
+    jj["messages"].append(data)
+
+    resp = requests.post(url, headers=auth_headers, json=jj)
 
     if resp.status_code != 200:
-        dialogue['messages'].pop()
-        with open('dialogue.json', 'w', encoding='utf-8') as f:
-            json.dump(dialogue, f, ensure_ascii=False, indent=4)
-        f.close()
         raise RuntimeError(
             'Invalid response received: code: {}, message: {}'.format(
                 *{resp.status_code}, *{resp.text}
             )
         )
 
-    with open('dialogue.json', 'r', encoding='utf-8') as f:
-        dialogue = json.load(f)
-    f.close()
+    return resp.json()["result"]["alternatives"][0]["message"]["text"]
 
-    stream = dialogue["messages"]
+print(gpt({
+            "role": "user",
+            "text": "4 вагонов, 0 человека, 1 машины, 2 больших вагона"
+        }))
 
-    with open('stream.json', 'w', encoding='utf-8') as f:
-        json.dump(stream, f, ensure_ascii=False, indent=4)
-    f.close()
 
-    return
-
-pprint(yangpt("какие грузовые вагоны ты знаешь?"))

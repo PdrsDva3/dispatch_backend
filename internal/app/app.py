@@ -9,6 +9,8 @@ from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+from deploy import config
+# import dotenv
 
 app = FastAPI()
 
@@ -18,9 +20,10 @@ trace.set_tracer_provider(
     )
 )
 
+# dotenv.DotEnv("/home/setqbyte/PycharmProjects/dispatch_backend/deploy/.env")
 jaeger_exporter = JaegerExporter(
-    agent_host_name=os.getenv("TRACE_HOST"),
-    agent_port=int(os.getenv("TRACE_PORT")),
+    agent_host_name=config.TRACE_HOST,
+    agent_port=config.TRACE_PORT,
 )
 
 trace.get_tracer_provider().add_span_processor(

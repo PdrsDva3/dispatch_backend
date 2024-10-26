@@ -1,10 +1,12 @@
 import hashlib
 
 import psycopg2
+from dotenv import DotEnv
 from psycopg2 import sql
 import os
-from dotenv import load_dotenv
+import dotenv
 import logging
+from deploy import config
 
 
 logging.basicConfig(
@@ -21,13 +23,13 @@ logger = logging.getLogger(__name__)
 
 
 
-load_dotenv()
+# DotEnv("/home/setqbyte/PycharmProjects/dispatch_backend/deploy/.env")
 db_config = {
-    'dbname': os.getenv('DB_NAME'),
-    'user': os.getenv('DB_USER'),
-    'password': os.getenv('DB_PASSWORD'),
-    'host': os.getenv('DB_HOST'),
-    'port': os.getenv('DB_PORT')
+    'dbname': config.DB_NAME,
+    'user': config.DB_USER,
+    'password': config.DB_PASSWORD,
+    'host': config.DB_HOST,
+    'port': config.DB_PORT,
 }
 
 

@@ -1,7 +1,7 @@
 import os
 
 from fastapi import FastAPI, HTTPException
-from tests.test_python import image
+# from tests.test_python import image
 
 from deploy.migrations import get_employee, create_employee, login_employee
 

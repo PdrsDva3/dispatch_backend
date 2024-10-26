@@ -7,12 +7,20 @@ import base64
 from PIL import Image
 import json
 import io
+import os
 
+_, cap1 = cv2.VideoCapture(0).read()
 
-video_path = "/Users/alexgorin/Documents/Development/pythonProject2/itc2024/rzhd2_dataset/2_5208500968638928983.mp4"
+video_path = os.getcwd() + "/internal/app/2_5208500968638928983.mp4"
+model_path = os.getcwd() + "/internal/app/best.onnx"
+
+# video_path = "/Users/alexgorin/Documents/Development/pythonProject2/itc2024/rzhd2_dataset/2_5208500968638928983.mp4"
 
 # Load the YOLO model
-model = YOLO("/Users/alexgorin/Documents/Development/pythonProject2/itc2024/best.onnx")  # pretrained YOLO11n model
+# model = YOLO("/Users/alexgorin/Documents/Development/pythonProject2/itc2024/best.onnx")  # pretrained YOLO11n model
+model = YOLO(model_path)
+photo = model(cap1)[0].plot()
+
 
 def funct(video_path):
     # Open the video file
@@ -43,6 +51,7 @@ def funct(video_path):
 
                 # Visualize the results on the frame
                 annotated_frame = results[0].plot()
+                photo = annotated_frame
                 print("Big trains", big_train_count)
                 # Display the annotated frame
                 cv2.imshow("YOLO Inference", annotated_frame)

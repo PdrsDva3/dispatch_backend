@@ -1,6 +1,8 @@
 import os
 
 from fastapi import FastAPI, HTTPException
+from tests.test_python import image
+
 from deploy.migrations import get_employee, create_employee, login_employee
 
 from opentelemetry import trace
@@ -10,8 +12,9 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from deploy import config
-
+from internal.app.vision import photo
 from fastapi.responses import HTMLResponse
+import time
 # import dotenv
 
 app = FastAPI()
@@ -100,8 +103,41 @@ async def generate_byte_stream():
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     while True:
-        data = generate_byte_stream()
+        data = get_photo()
+        # time.sleep(1)
         await websocket.send_text(f"Message text was: {data}")
+
+
+async def get_photo():
+    import cv2
+    import io
+    import base64
+    from matplotlib import pyplot as plt
+
+    # Предположим, что results[0].plot() возвращает изображение в формате numpy array
+    annotated_frame = photo
+
+    # Преобразуем изображение из BGR в RGB (если используется OpenCV)
+    annotated_frame_rgb = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
+
+    # Создаем буфер в памяти
+    buf = io.BytesIO()
+
+    # Сохраняем изображение в буфер с помощью matplotlib
+    plt.imsave(buf, annotated_frame_rgb, format='png')
+
+    # Получаем байты из буфера
+    image_bytes = buf.getvalue()
+
+    # Преобразуем байты в строку Base64
+    image_base64 = base64.b64encode(image_bytes).decode('utf-8')
+
+    # Закрываем буфер
+    buf.close()
+
+    # Создаем HTML-код с изображением
+    html_img = f'<img src="data:image/png;base64,{image_base64}" alt="Annotated Frame"/>'
+    return html_img
 
 
 

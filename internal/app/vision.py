@@ -7,22 +7,18 @@ import base64
 from PIL import Image
 import json
 import io
-import os
 
-_, cap1 = cv2.VideoCapture(0).read()
+app = FastAPI()
 
-video_path = os.getcwd() + "/internal/app/2_5208500968638928983.mp4"
-model_path = os.getcwd() + "/internal/app/best.onnx"
-
-# video_path = "/Users/alexgorin/Documents/Development/pythonProject2/itc2024/rzhd2_dataset/2_5208500968638928983.mp4"
+video_path = "/Users/alexgorin/Documents/Development/pythonProject2/itc2024/rzhd2_dataset/2_5208500968638928983.mp4"
 
 # Load the YOLO model
-# model = YOLO("/Users/alexgorin/Documents/Development/pythonProject2/itc2024/best.onnx")  # pretrained YOLO11n model
-model = YOLO(model_path)
-photo = model(cap1)[0].plot()
+model = YOLO("/Users/alexgorin/Documents/Development/pythonProject2/itc2024/best.onnx")  # pretrained YOLO11n model
 
-
-def funct(video_path):
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    
     # Open the video file
     cap = cv2.VideoCapture(video_path)
 
@@ -39,7 +35,7 @@ def funct(video_path):
             if frame_count % 3 == 0:
                 results = model(frame)
                 big_train_count = 0
-                # print(results[0])
+                # print("boxes---")
                 for r in results:
                     for i in range(len(r.boxes.cls)):
                         if r.boxes.cls[i] == 4:
@@ -51,7 +47,14 @@ def funct(video_path):
 
                 # Visualize the results on the frame
                 annotated_frame = results[0].plot()
-                photo = annotated_frame
+                _, buffer = cv2.imencode('.jpg', annotated_frame)
+                base64_frame = base64.b64encode(buffer).decode('utf-8')
+                
+                # Отправка кадра через WebSocket
+                await websocket.send_text(base64_frame)
+
+                # send base64 to frontend!!!
+
                 print("Big trains", big_train_count)
                 # Display the annotated frame
                 # cv2.imshow("YOLO Inference", annotated_frame)
@@ -66,6 +69,3 @@ def funct(video_path):
     # Release the video capture object and close the display window
     cap.release()
     # cv2.destroyAllWindows()
-
-
-funct(video_path)

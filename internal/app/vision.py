@@ -39,7 +39,7 @@ def funct(video_path):
             if frame_count % 3 == 0:
                 results = model(frame)
                 big_train_count = 0
-                # print("boxes---")
+                # print(results[0])
                 for r in results:
                     for i in range(len(r.boxes.cls)):
                         if r.boxes.cls[i] == 4:
@@ -54,18 +54,18 @@ def funct(video_path):
                 photo = annotated_frame
                 print("Big trains", big_train_count)
                 # Display the annotated frame
-                cv2.imshow("YOLO Inference", annotated_frame)
+                # cv2.imshow("YOLO Inference", annotated_frame)
 
                 # Break the loop if 'q' is pressed
-                if cv2.waitKey(1) & 0xFF == ord("q"):
-                    break
+                # if cv2.waitKey(1) & 0xFF == ord("q"):
+                #     break
         else:
             # Break the loop if the end of the video is reached
             break
 
     # Release the video capture object and close the display window
     cap.release()
-    cv2.destroyAllWindows()
+    # cv2.destroyAllWindows()
 
 
 funct(video_path)

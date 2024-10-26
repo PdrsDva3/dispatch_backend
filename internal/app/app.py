@@ -15,6 +15,10 @@ from deploy import config
 from internal.app.vision import photo
 from fastapi.responses import HTMLResponse
 import time
+import cv2
+import io
+import base64
+from matplotlib import pyplot as plt
 # import dotenv
 
 app = FastAPI()
@@ -111,11 +115,6 @@ async def websocket_endpoint(websocket: WebSocket):
 
 
 async def get_photo():
-    import cv2
-    import io
-    import base64
-    from matplotlib import pyplot as plt
-
     # Предположим, что results[0].plot() возвращает изображение в формате numpy array
     annotated_frame = photo
 

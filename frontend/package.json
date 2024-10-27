@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-		"server": "json-server --watch ./src/data/db.json --port 8005",
+    "server": "json-server --watch ./src/data/db.json --port 8005",
     "preview": "vite preview",
     "format": "prettier --write ./src"
   },
@@ -15,6 +15,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",
+    "@mui/icons-material": "^6.1.5",
     "@mui/lab": "^6.0.0-beta.13",
     "@mui/material": "^6.1.5",
     "@mui/styled-engine": "^6.1.5",

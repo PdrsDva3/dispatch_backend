@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
     build:
         context: ./ml
-        dockerfile: ml.dockerfile
+        dockerfile: deploy/app.Dockerfile
     ports:
         - "6969:6969"
     volumes:
@@ -45,12 +45,12 @@ services:
   tg_bot:
     build:
       context: ./tgbot
-      dockerfile: ./tgbot/Dockerfile
+      dockerfile: Dockerfile
     container_name: tgbot_container
     volumes:
         - ./tgbot:/app
     environment:
-        - ENV_VAR=your_value
+        - .env
 
   jaeger:
     image: jaegertracing/all-in-one

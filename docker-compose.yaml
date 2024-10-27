@@ -4,12 +4,12 @@ services:
     env_file:
       - .env
     environment:
-      POSTGRES_USER: ${DB_USER_NAME}
-      POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_PORT: ${DB_PORT}
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "5432:5432"
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -h localhost -p $$DB_PORT" ]
       interval: 3s
@@ -30,7 +30,7 @@ services:
     environment:
       DATABASE_HOST: postgres_database
     ports:
-      - "${PORT}:${PORT}"
+      - "8000:8000"
   ml:
     container_name: ml_app
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
         context: ./ml
         dockerfile: ml.dockerfile
     ports:
-        - 6969:6969
+        - "6969:6969"
     volumes:
         - ./volumes/ml_data:/ml_data
 
@@ -63,3 +63,14 @@ services:
       - "14268:14268"     # для HTTP API
       - "14250:14250"     # для gRPC
       - "9411:9411"
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - app
+    networks:
+      - dev

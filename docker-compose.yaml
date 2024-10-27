@@ -19,7 +19,7 @@ services:
   python-fastapi:
     build:
       context:
-        ./fastapi_app
+        fastapi_app
       dockerfile:
         deploy/app.Dockerfile
     depends_on:

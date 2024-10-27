@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-    <img src="./forntend/app/src/assets/svg/rgdlogo.svg" alt="Logo" width="80" >
+    <img src="frontend/app/src/assets/svg/rgdlogo.svg" alt="Logo" width="80" >
 <h3 align="center">Диспетчерский контроль</h3>
 <h4>MISIS GogoRiki</h4>
   <p align="center">

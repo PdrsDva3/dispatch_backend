@@ -6,14 +6,14 @@ from aiogram.types import ReplyKeyboardRemove
 from aiogram import Bot, Dispatcher, types
 # import fms.login, fms.create, fms.question
 # import db.db
-from config import TOKEN_API
+# from config import TOKEN_API
 # import yagpt.gpt
 # from yagpt.gpt import epi
 # from command import dp
 # from db.db import db_start, db_deader
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from config import TOKEN_API
+# from config import TOKEN_API
 import keyboard as kb
 import login
 import report

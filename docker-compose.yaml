@@ -18,10 +18,9 @@ services:
 
   python-fastapi:
     build:
-      context:
-        fastapi_app
-      dockerfile:
-        deploy/app.Dockerfile
+      context: ./fastapi_app
+      dockerfile: ./deploy/app.Dockerfile
+      #dockerfile: ./fastapi_app/deploy/app.Dockerfile
     depends_on:
       postgres-database:
         condition: service_healthy
@@ -36,7 +35,8 @@ services:
     restart: unless-stopped
     build:
         context: ./ml
-        dockerfile: deploy/app.Dockerfile
+        dockerfile: ./deploy/app.Dockerfile
+        #dockerfile: ./ml/deploy/app.Dockerfile
     ports:
         - "6969:6969"
     volumes:

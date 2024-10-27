@@ -3,7 +3,7 @@ FROM python:3.9
 WORKDIR /fastapi_app
 
 COPY requirements.txt ./requirements.txt
-COPY ../ ./
+COPY ./ ./
 
 
 RUN pip install --no-cache-dir -r requirements.txt

@@ -6,7 +6,7 @@ from psycopg2 import sql
 import os
 # import dotenv
 import logging
-import config
+# import config
 
 logging.basicConfig(
     level=logging.DEBUG,

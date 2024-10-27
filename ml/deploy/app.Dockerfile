@@ -1,6 +1,6 @@
 FROM python:3.12
 
-WORKDIR /usr/src/ml
+WORKDIR /ml
 
 COPY requirements.txt ./requirements.txt
 COPY ../ ./

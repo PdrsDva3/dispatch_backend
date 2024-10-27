@@ -1,6 +1,6 @@
 FROM python:3.12
 
-WORKDIR /app
+WORKDIR /fastapi_app
 
 COPY requirements.txt ./requirements.txt
 COPY ../ ./

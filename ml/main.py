@@ -1,4 +1,4 @@
-from ml.internal.app.vision import app1
+from internal.app.vision import app1
 
 if __name__ == "__main__":
     import uvicorn

@@ -14,11 +14,11 @@ from config import TOKEN_API
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from config import TOKEN_API
-from internal.tg_bot import keyboard as kb
-import internal.tg_bot.login
-import internal.tg_bot.report
+import keyboard as kb
+import login
+import report
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from internal.tg_bot.init import dp
+from init import dp
 
 START = """Здравствуйте!\n \nБота создала команда MISIS GogoRiki"""
 

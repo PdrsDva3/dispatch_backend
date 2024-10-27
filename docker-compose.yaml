@@ -1,0 +1,65 @@
+services:
+  postgres-database:
+    image: postgres:15
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER_NAME}
+      POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PORT: ${DB_PORT}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -h localhost -p $$DB_PORT" ]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+
+  python-fastapi:
+    build:
+      context:
+        ./fastapi_app
+      dockerfile:
+        deploy/app.Dockerfile
+    depends_on:
+      postgres-database:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DATABASE_HOST: postgres_database
+    ports:
+      - "${PORT}:${PORT}"
+  ml:
+    container_name: ml_app
+    restart: unless-stopped
+    build:
+        context: ./ml
+        dockerfile: ml.dockerfile
+    ports:
+        - 6969:6969
+    volumes:
+        - ./volumes/ml_data:/ml_data
+
+  tg_bot:
+    build:
+      context: ./tgbot
+      dockerfile: ./tgbot/Dockerfile
+    container_name: tgbot_container
+    volumes:
+        - ./tgbot:/app
+    environment:
+        - ENV_VAR=your_value
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      - "5775:5775/udp"   # для приема данных от клиентов
+      - "6831:6831/udp"   # для приема данных от клиентов
+      - "6832:6832/udp"   # для приема данных от агентов
+      - "5778:5778"       # для метрик
+      - "16686:16686"     # для веб-интерфейса
+      - "14268:14268"     # для HTTP API
+      - "14250:14250"     # для gRPC
+      - "9411:9411"

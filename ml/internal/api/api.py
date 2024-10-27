@@ -10,7 +10,7 @@ api_key = YAN_API_KEY
 yan_url = YAN_URL
 
 
-with open('./ml/internal/api/body.json', 'r', encoding='utf-8') as f:
+with open('./internal/api/body.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 data['modelUri'] = "gpt://" + yan_url + "/yandexgpt-lite"

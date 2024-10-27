@@ -12,8 +12,11 @@ import {
 	Typography,
 } from '@mui/material';
 import arrow_left from '../../assets/svg/arrow_left.svg';
-import { useNavigate } from 'react-router-dom';
-import { Chat } from '../../components/Chat/Chat.tsx';
+import {useNavigate} from 'react-router-dom';
+import {Chat} from '../../components/Chat/Chat.tsx';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect} from 'react';
+import type {RootState} from '../../redux/store.ts';
 
 export const MonitoringPage = () => {
 	const navigate = useNavigate();
@@ -21,6 +24,14 @@ export const MonitoringPage = () => {
 	const handleSectionClick = () => {
 		navigate('/');
 	};
+
+	const dispatch = useDispatch();
+	const imageData = useSelector((state: RootState) => state.stream.imageData);
+
+	useEffect(() => {
+		dispatch({type: 'stream/connect'});
+	}, [dispatch]);
+
 
 	return (
 		<Grid2 container spacing={2} sx={{ px: 10, mt: 2 }}>
@@ -48,11 +59,11 @@ export const MonitoringPage = () => {
 					boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.16)',
 				}}>
 					<CardMedia
+						id="videoStream"
 						height='600vh'
-						component="video"
-						image="/path/to/your/video.mp4"
-						autoPlay
-						controls
+						component="img"
+						src={imageData ? `data:image/jpeg;base64,${imageData}` : ''}
+						alt="image stream"
 						sx={{ borderRadius: '10px', boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.16)' }}
 					/>
 				</Box>
@@ -90,7 +101,7 @@ export const MonitoringPage = () => {
 									variant="h6"
 									sx={{ color: 'blueGray.main' }}
 								>
-									погрузочный кран
+									Машина
 								</Typography>
 							</Container>
 							<Container sx={{ p: 0, display:"flex", gap:1 }}>
@@ -102,7 +113,7 @@ export const MonitoringPage = () => {
 									variant="h6"
 									sx={{ color: 'blueGray.main' }}
 								>
-									1 единица
+									2 единицы
 								</Typography>
 
 							</Container>
@@ -115,7 +126,7 @@ export const MonitoringPage = () => {
 									variant="h6"
 									sx={{ color: 'blueGray.main' }}
 								>
-									погрузочный кран
+									Рабочий
 								</Typography>
 							</Container>
 							<Container sx={{ p: 0, display:"flex", gap:1 }}>

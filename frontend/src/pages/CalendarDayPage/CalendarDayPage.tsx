@@ -6,17 +6,14 @@ import { Container } from '@mui/material';
 
 
 const rows: GridRowsProp = [
-	{ id: 1, col1: 'Hello', col2: 'World' },
-	{ id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-	{ id: 3, col1: 'MUI', col2: 'is Amazing' },
-	{ id: 4, col1: 'DataGridPro', col2: 'is Awesome' },
+	{ id: 1, col1: '0', col2: '0', col3: '0', col4: '0'}
 ];
 
 const columns: GridColDef[] = [
-	{ field: 'col1', headerName: 'Column 1', width: 150 },
-	{ field: 'col2', headerName: 'Column 2', width: 150 },
-	{ field: 'col3', headerName: 'Column 3', width: 150 },
-	{ field: 'col4', headerName: 'Column 4', width: 150 },
+	{ field: 'col1', headerName: 'Экскаватор', width: 150 },
+	{ field: 'col2', headerName: 'Машина', width: 150 },
+	{ field: 'col3', headerName: 'Вагон', width: 150 },
+	{ field: 'col4', headerName: 'Рабочий', width: 150 },
 ];
 
 export const CalendarDayPage = () => {

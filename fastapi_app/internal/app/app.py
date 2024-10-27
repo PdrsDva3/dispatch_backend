@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 # from tests.test_python import image
 
-from fastapi_app.deploy.migrations import get_employee, create_employee, login_employee
+from deploy.migrations import get_employee, create_employee, login_employee
 
 from opentelemetry import trace
 from opentelemetry.exporter.jaeger.thrift import JaegerExporter
@@ -20,7 +20,7 @@ import cv2
 import io
 import base64
 from matplotlib import pyplot as plt
-from fastapi_app.deploy.migrations import get_report
+from deploy.migrations import get_report
 
 # import dotenv
 

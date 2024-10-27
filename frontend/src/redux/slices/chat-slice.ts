@@ -7,7 +7,13 @@ interface ChatState {
 }
 
 const initialState: ChatState = {
-	messages: [],
+	messages: [
+		{
+			id: "1",
+			text: 'No problem',
+			timestamp: String(new Date().getTime())
+		}
+	],
 };
 
 const chatSlice = createSlice({

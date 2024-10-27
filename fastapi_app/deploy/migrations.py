@@ -18,14 +18,18 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-
+DB_NAME='postgres'
+DB_PORT=5432
+DB_PASSWORD='postgres'
+DB_USER='postgres'
+DB_HOST='localhost'
 # DotEnv("/home/setqbyte/PycharmProjects/dispatch_backend/deploy/.env")
 db_config = {
-    'dbname': config.DB_NAME,
-    'user': config.DB_USER,
-    'password': config.DB_PASSWORD,
-    'host': config.DB_HOST,
-    'port': config.DB_PORT,
+    'dbname':  DB_NAME,
+    'user':  DB_USER,
+    'password':  DB_PASSWORD,
+    'host':  DB_HOST,
+    'port':  DB_PORT,
 }
 
 
@@ -184,11 +188,11 @@ async def login_employee(login, password):
 
 
 db_config = {
-    'dbname': config.DB_NAME,
-    'user': config.DB_USER,
-    'password': config.DB_PASSWORD,
-    'host': config.DB_HOST,
-    'port': config.DB_PORT,
+    'dbname':  DB_NAME,
+    'user':  DB_USER,
+    'password':  DB_PASSWORD,
+    'host':  DB_HOST,
+    'port':  DB_PORT,
 }
 
 

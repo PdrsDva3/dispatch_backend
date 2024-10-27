@@ -6,13 +6,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from deploy.migrations import get_employee, create_employee, login_employee
 
-from opentelemetry import trace
-from opentelemetry.exporter.jaeger.thrift import JaegerExporter
-from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-import config
+# from opentelemetry import trace
+# from opentelemetry.exporter.jaeger.thrift import JaegerExporter
+# from opentelemetry.sdk.resources import Resource
+# from opentelemetry.sdk.trace import TracerProvider
+# from opentelemetry.sdk.trace.export import BatchSpanProcessor
+# from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+# import config
 # from internal.app.vision import photo
 from fastapi.responses import HTMLResponse
 import time
@@ -40,31 +40,31 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+#
+# trace.set_tracer_provider(
+#     TracerProvider(
+#         resource=Resource.create({"service.name": "my-fastapi-service"})
+#     )
+# )
+#
+# jaeger_exporter = JaegerExporter(
+#     agent_host_name='6831',
+#     agent_port='localhost',
+# )
+#
+# trace.get_tracer_provider().add_span_processor(
+#     BatchSpanProcessor(jaeger_exporter)
+# )
 
-trace.set_tracer_provider(
-    TracerProvider(
-        resource=Resource.create({"service.name": "my-fastapi-service"})
-    )
-)
+# FastAPIInstrumentor.instrument_app(app)
 
-jaeger_exporter = JaegerExporter(
-    agent_host_name=config.TRACE_HOST,
-    agent_port=config.TRACE_PORT,
-)
-
-trace.get_tracer_provider().add_span_processor(
-    BatchSpanProcessor(jaeger_exporter)
-)
-
-FastAPIInstrumentor.instrument_app(app)
-
-tracer = trace.get_tracer(__name__)
+# tracer = trace.get_tracer(__name__)
 
 
 @app.get("/employee={id}")
 async def get_employee_h(employee_id: int):
-    with tracer.start_as_current_span("get_employee_handler") as span:
-        span.set_attribute("handler", "get_employee")
+    # with tracer.start_as_current_span("get_employee_handler") as span:
+    #     span.set_attribute("handler", "get_employee")
     employee = await get_employee(employee_id)
     if not employee:
         raise HTTPException(status_code=404, detail="User not found")
@@ -73,8 +73,8 @@ async def get_employee_h(employee_id: int):
 
 @app.post("/create_employee")
 async def create_employee_h(login: str, password: str, name: str, last_name: str, father_name: str, profession: str):
-    with tracer.start_as_current_span("create_employee_handler") as span:
-        span.set_attribute("handler", "create_employee")
+    # with tracer.start_as_current_span("create_employee_handler") as span:
+    #     span.set_attribute("handler", "create_employee")
     employee_id = await create_employee(login, password, name, last_name, father_name, profession)
     if employee_id is None:
         raise HTTPException(status_code=500, detail="Internal Server Error")
@@ -83,8 +83,8 @@ async def create_employee_h(login: str, password: str, name: str, last_name: str
 
 @app.post("/login")
 async def login_employee_h(login: str, password: str):
-    with tracer.start_as_current_span("login_employee_handler") as span:
-        span.set_attribute("handler", "login_employee")
+    # with tracer.start_as_current_span("login_employee_handler") as span:
+    #     span.set_attribute("handler", "login_employee")
     employee_id = await login_employee(login, password)
     if employee_id is None:
         raise HTTPException(status_code=404, detail="Invalid login or password")

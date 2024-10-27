@@ -1,10 +1,13 @@
-import config
+# import config
 import requests
 import json
 from pprint import pprint
 
-api_key = config.YAN_API_KEY
-yan_url = config.YAN_URL
+YAN_API_KEY='AQVN0YxuUPrTFVCSYCYTJaRjmu8QM42ZV1CTls4s'
+YAN_URL='ajehhhn51umj2l894o16'
+
+api_key = YAN_API_KEY
+yan_url = YAN_URL
 
 
 with open('./fastapi_app/internal/api/body.json', 'r', encoding='utf-8') as f:

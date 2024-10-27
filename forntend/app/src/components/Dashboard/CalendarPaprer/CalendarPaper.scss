@@ -1,0 +1,14 @@
+.elevate--hover {
+	position: relative;
+	max-width: 26.389vw;
+
+	&:hover {
+		transform: translateY(-10px);
+		transition: all 0.5s ease;
+	}
+
+	&:not(:hover) {
+		transform: translateY(0px);
+		transition: all 0.5s ease;
+	}
+}

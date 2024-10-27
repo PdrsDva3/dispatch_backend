@@ -1,0 +1,20 @@
+.red-line {
+	width: 100%;
+	position: absolute;
+	bottom: 0%;
+}
+
+.app-bar {
+	position: fixed;
+	top: 200px;
+	left: 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo {
+	height: 80px;
+	padding-right: 80px;
+}
+
+

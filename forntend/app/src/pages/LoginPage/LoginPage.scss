@@ -1,0 +1,348 @@
+.main_wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&::after {
+		content: "";
+		position: absolute;
+		top:50%;
+		//right: 50%;
+		transform: translate(0,-50%);
+		width: 400px;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		box-shadow: 0 0 150px rgba(255, 0, 0, 1);
+		//background-color: #E21A1A;
+		z-index: 10;
+	}
+}
+
+.login__image-wrapper {
+
+}
+
+.back_image {
+	display: grid;
+	grid-template-columns: 60% 40%;
+	position: absolute;
+}
+
+.rectangle_left_top {
+	position: absolute;
+	right: 45%;
+	top: 5%;
+	animation-duration: 1280ms;
+  animation-name: rectangle_left_top;
+}
+
+@keyframes rectangle_left_top {
+	from {
+		right: 30%;
+		top: 10%;
+		opacity: 0;
+	}
+
+	to {
+		right: 45%;
+		top: 5%;
+		opacity: 100%;
+	}
+
+}
+
+.line_left_top{
+	position: absolute;
+	left:25% ;
+	top: 20%;
+	z-index: 40;
+	animation-duration: 1280ms;
+  animation-name: line_left_top;
+}
+
+@keyframes line_left_top {
+	from {
+		left: 35%;
+		opacity: 0;
+	}
+
+	to {
+		left: 25%;
+		opacity: 100%;
+	}
+
+}
+
+
+.big_train{
+	position: absolute;
+	top: 33%;
+	left: 8%;
+	z-index: 40;
+	animation-duration: 1280ms;
+  animation-name: big_train;
+
+}
+
+@keyframes big_train {
+	from {
+		left: 25%;
+		opacity: 10%;
+
+	}
+
+	to{
+		left: 8%;
+		opacity: 100%;
+
+	}
+}
+
+
+
+
+.rectangle_right_top {
+	position: absolute;
+	right: 25%;
+	top: 5%;
+	animation-duration: 1280ms;
+  animation-name: rectangle_right_top;
+}
+
+@keyframes rectangle_right_top {
+	from {
+		right: 35%;
+		opacity: 0;
+		top: 10%;
+	}
+
+	to {
+		right: 25%;
+		opacity: 100%;
+		top: 5%;
+	}
+
+}
+
+.rectangle_left_bottom {
+	position: absolute;
+	bottom: 5%;
+	left: 25%;
+	animation-duration: 1280ms;
+  animation-name: rectangle_left_bottom;
+}
+
+@keyframes rectangle_left_bottom {
+	from {
+		left: 35%;
+		opacity: 0;
+		bottom: 10%;
+	}
+
+	to {
+		left: 25%;
+		opacity: 100%;
+		bottom: 5%;
+	}
+
+}
+
+.line_left_bottom {
+	position: absolute;
+	bottom: 35%;
+	left: 15%;
+	animation-duration: 1280ms;
+  animation-name: line_left_bottom;
+}
+
+@keyframes line_left_bottom {
+	from {
+		left: 20%;
+		opacity: 0;
+	}
+
+	to {
+		left: 15%;
+		opacity: 100%;
+	}
+
+}
+
+
+.small_train {
+	position: absolute;
+	right: 15%;
+	bottom: 33%;
+	animation-duration: 1280ms;
+  animation-name: small_train;
+}
+
+@keyframes small_train {
+	from {
+		right: 25%;
+		opacity: 0;
+	}
+
+	to{
+		right: 15%;
+		opacity: 100%;
+	}
+}
+
+
+.line_right_bottom {
+	position: absolute;
+	bottom: 20%;
+	right: 25%;
+	z-index: 30;
+	animation-duration: 1280ms;
+  animation-name: line_right_bottom;
+
+}
+
+@keyframes line_right_bottom {
+	from {
+		right: 35%;
+		opacity: 0;
+	}
+	to {
+		right: 25%;
+		opacity: 100%;
+	}
+}
+
+@keyframes subtracts {
+	from {
+		opacity: 0;
+		left: 100px;
+	}
+	to {
+		opacity: 100%;
+		right: 0px;
+	}
+
+}
+
+.subtracts {
+	position: relative;
+	top: 270px;
+	left: 183.5%;
+	z-index: 20;
+	animation-duration: 1280ms;
+  animation-name: subtracts;
+}
+
+
+
+.ellipse {
+	position: absolute;
+	right: 35%;
+	bottom: 10%;
+	animation-duration: 1280ms;
+  animation-name: ellipse;
+	z-index: 40;
+}
+
+@keyframes ellipse {
+	from {
+		right: 45%;
+		opacity: 0;
+		bottom: 25%;
+	}
+	to {
+		right: 35%;
+		opacity: 100%;
+		bottom: 10%;
+	}
+
+}
+
+//.form_wrapper {
+//	display: flex;
+//	flex-direction: row;
+//	position: absolute;
+//	top: 50%;
+//	right: 50%;
+//	transform: translate(-50%, -50%);
+//	align-items: end;
+//	z-index: 50;
+
+//}
+
+.login_form {
+	position: absolute;
+	top:50%;
+	transform: translate(0%,-50%);
+	width: 400px;
+	height: 550px;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	background-color:white;
+	z-index: 60;
+	align-items: center;
+	padding: 20px;
+
+
+}
+
+
+
+.tree {
+	position: absolute;
+	right: 27%;
+	top: 20%;
+	width:12%;
+	animation-duration: 1280ms;
+  animation-name: tree;
+
+}
+
+@keyframes tree {
+	from {
+		right: 37%;
+		top: 30%;
+		opacity: 0;
+	}
+	to {
+		right: 27%;
+		top: 20%;
+		opacity: 100%;
+	}
+
+}
+
+.title {
+	animation-duration: 1800ms;
+  animation-name: title;
+
+}
+
+@keyframes title {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 100%;
+	}
+
+}
+
+.login_user_password {
+	animation-duration: 3000ms;
+  animation-name: login_user_password;;
+}
+
+@keyframes login_user_password {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 100%;
+	}
+
+}
+
+.login__btn {
+	font-family: "RRG_Ex", 'sans-serif';
+}

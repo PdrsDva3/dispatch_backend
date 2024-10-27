@@ -1,0 +1,52 @@
+.flex {
+	display: flex;
+}
+
+.flex--column {
+	display: flex;
+	flex-direction: column;
+}
+
+.custom--transition {
+	position: relative;
+
+	&:hover {
+		transform: translateY(-10px);
+		transition: all 0.5s ease;
+	}
+
+	&:not(:hover) {
+		transform: translateY(0px);
+		transition: all 0.5s ease;
+	}
+}
+
+.hover--effect {
+	transform: translateY(0);
+	transition: all 0.5s ease;
+
+	&:hover {
+		transform: translateY(-10px);
+		transition: all 0.5s ease;
+	}
+
+	&:not(:hover) {
+		transform: translateY(0px);
+		transition: all 0.5s ease;
+	}
+}
+
+.elevate--hover {
+	position: relative;
+	max-width: 26.389vw;
+
+	&:hover {
+		transform: translateY(-10px);
+		transition: all 0.5s ease;
+	}
+
+	&:not(:hover) {
+		transform: translateY(0px);
+		transition: all 0.5s ease;
+	}
+}

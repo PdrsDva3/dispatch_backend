@@ -17,6 +17,7 @@ import {Chat} from '../../components/Chat/Chat.tsx';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import type {RootState} from '../../redux/store.ts';
+import {example} from '../../constants/example.ts';
 
 export const MonitoringPage = () => {
 	const navigate = useNavigate();
@@ -60,11 +61,15 @@ export const MonitoringPage = () => {
 				}}>
 					<CardMedia
 						id="videoStream"
-						height='600vh'
 						component="img"
-						src={imageData ? `data:image/jpeg;base64,${imageData}` : ''}
+						src={imageData ? `data:image/jpeg;base64,${imageData}` : example}
 						alt="image stream"
-						sx={{ borderRadius: '10px', boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.16)' }}
+						sx={{
+							maxHeight:"70vh",
+							objectFit: 'contain', // Use 'cover' if you want the image to fill the container
+							borderRadius: '10px',
+							boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.16)',
+						}}
 					/>
 				</Box>
 			</Grid2>
@@ -101,7 +106,7 @@ export const MonitoringPage = () => {
 									variant="h6"
 									sx={{ color: 'blueGray.main' }}
 								>
-									Машина
+									Вагон
 								</Typography>
 							</Container>
 							<Container sx={{ p: 0, display:"flex", gap:1 }}>
@@ -113,7 +118,7 @@ export const MonitoringPage = () => {
 									variant="h6"
 									sx={{ color: 'blueGray.main' }}
 								>
-									2 единицы
+									5 единиц
 								</Typography>
 
 							</Container>

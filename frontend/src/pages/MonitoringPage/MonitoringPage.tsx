@@ -101,7 +101,7 @@ export const MonitoringPage = () => {
 									variant="h6"
 									sx={{ color: 'blueGray.main' }}
 								>
-									погрузочный кран
+									Машина
 								</Typography>
 							</Container>
 							<Container sx={{ p: 0, display:"flex", gap:1 }}>
@@ -113,7 +113,7 @@ export const MonitoringPage = () => {
 									variant="h6"
 									sx={{ color: 'blueGray.main' }}
 								>
-									1 единица
+									2 единицы
 								</Typography>
 
 							</Container>
@@ -126,7 +126,7 @@ export const MonitoringPage = () => {
 									variant="h6"
 									sx={{ color: 'blueGray.main' }}
 								>
-									погрузочный кран
+									Рабочий
 								</Typography>
 							</Container>
 							<Container sx={{ p: 0, display:"flex", gap:1 }}>

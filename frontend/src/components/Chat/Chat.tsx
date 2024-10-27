@@ -27,7 +27,7 @@ export const Chat: React.FC = () => {
 			boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
 			borderRadius: '12px',
 			p: 3,
-			height: '60vh',
+			height: '50vh',
 			overflowY: 'hidden',
 		}}>
 			<Chip label="Чат-бот" sx={{

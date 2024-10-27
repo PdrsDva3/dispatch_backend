@@ -6,7 +6,7 @@ from ultralytics import YOLO
 from fastapi import FastAPI, WebSocket
 import base64
 
-from fastapi_app.internal.api.api import gpt
+from internal.api.api import gpt
 
 from ml.deploy.migrations import add_new_report
 

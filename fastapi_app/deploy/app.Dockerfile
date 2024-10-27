@@ -1,6 +1,6 @@
 FROM python:3.12
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY requirements.txt ./requirements.txt
 COPY ../ ./

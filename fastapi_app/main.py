@@ -1,4 +1,4 @@
-from fastapi_app.internal.app.app import app
+from internal.app.app import app
 
 if __name__ == "__main__":
     import uvicorn

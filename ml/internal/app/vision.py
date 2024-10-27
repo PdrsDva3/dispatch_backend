@@ -1,25 +1,19 @@
-import time
 from datetime import datetime
 
 import cv2
 from starlette.responses import HTMLResponse
 from ultralytics import YOLO
 from fastapi import FastAPI, WebSocket
-import asyncio
-import uvicorn
 import base64
-from PIL import Image
-import json
-import io
-from internal.api.api import gpt
-from deploy.migrations import update_report, add_new_report
+from fastapi_app.internal.api.api import gpt
+from ml.deploy.migrations import add_new_report
 
 app1 = FastAPI()
 label_dict = {0: 'Excavator', 1: 'car', 2: 'danger', 3: 'rail', 4: 'wagon', 5: 'worker'}
 
-video_path = "/home/setqbyte/PycharmProjects/dispatch_backend/internal/app/2_5208500968638928983.mp4"
+video_path = "ml/internal/app/2_5208500968638928983.mp4"
 
-model = YOLO("/home/setqbyte/PycharmProjects/dispatch_backend/internal/app/best.onnx")  # pretrained YOLO11n model
+model = YOLO("ml/internal/app/best.onnx")  # pretrained YOLO11n model
 
 html = """
 <!DOCTYPE html>

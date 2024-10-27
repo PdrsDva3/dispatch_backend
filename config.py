@@ -1,0 +1,11 @@
+DB_NAME="postgres"
+DB_PORT=5432
+DB_PASSWORD="postgres"
+DB_USER="postgres"
+DB_HOST="localhost"
+
+TRACE_HOST="localhost"
+TRACE_PORT=6831
+
+YAN_API_KEY="AQVN0YxuUPrTFVCSYCYTJaRjmu8QM42ZV1CTls4s"
+YAN_URL="b1gdrtn45hu22d0p7pn9"

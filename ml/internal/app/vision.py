@@ -129,7 +129,7 @@ async def websocket_endpoint(websocket: WebSocket):
             for el in label_dict.values():
                 count[el] = 0
             count["big wagon"] = 0
-            text = f"{out["wagon"]} вагонов, {out["worker"]} человека, {out["car"]} машины, {out["big wagon"]} больших вагона, {out["Excavator"]} экскаваторов"
+            text = f"{out['wagon']} вагонов, {out['worker']} человека, {out['car']} машин, {out['big wagon']} больших вагонов, {out['Excavator']} экскаваторов"
 
             await add_new_report(out["worker"], out["wagon"], out["Excavator"], out["car"], out["big wagon"], datetime.now())
 
